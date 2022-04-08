@@ -12,7 +12,7 @@
         $username = "root";
         // If using XAMPP, 
         //  the password is an empty string.
-        $password = "root";
+        $password = "";
         // Database
         $database = "lab";
 
