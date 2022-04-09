@@ -59,6 +59,23 @@
         return $status;
     }
 
+    function database_deleteUser($username, $password) {
+        // Use the global connection
+        global $connection;
+
+        $status = false;
+
+        if ($connection != null) {
+            // Verify that user is in the database
+            if (database_verifyUser($username, $password)) {
+                if (mysqli_query($connection, "DELETE FROM users WHERE username = '{$username}'"));
+                    $status = true;
+            }
+        }
+
+        return $status;
+    }
+
     function database_close() {
         // user global connection
         global $connection;
