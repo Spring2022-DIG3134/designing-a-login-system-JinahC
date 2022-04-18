@@ -66,6 +66,21 @@
         return $status;
     }
 
+    function security_updatePassword() {
+         // Validate and sanitize.
+         $result = security_sanitize();
+         // Open connection.
+         database_connect();
+ 
+         // Use connection.
+         $status = database_updatePassword($result["username"], $result["password"], htmlspecialchars($_POST["new_password"]));
+ 
+         // Close connection
+         database_close();
+ 
+         return $status;
+    }
+
     function security_loggedIn() {
         // Does a cookie exist?
         return isset($_COOKIE["login"]);
