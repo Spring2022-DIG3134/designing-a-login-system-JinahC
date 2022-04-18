@@ -76,6 +76,28 @@
         return $status;
     }
 
+    function database_updatePassword($username, $password, $new_password) {
+        // Use the global connection
+        global $connection;
+
+        $status = false;
+
+        if ($connection != null) {
+            // Verify that user is in the database
+            if (database_verifyUser($username, $password)) {
+                // Hashing the new password
+                $new_password = password_hash($new_password, PASSWORD_DEFAULT);
+                // Create query
+                $update_query = "UPDATE users SET password = '{$new_password}'  WHERE username = '{$username}'";
+
+                if (mysqli_query($connection, $update_query))
+                    $status = true;
+            }
+        }
+
+        return $status;
+    }
+
     function database_close() {
         // user global connection
         global $connection;
