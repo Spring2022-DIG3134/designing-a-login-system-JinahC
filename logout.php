@@ -1,6 +1,5 @@
 <?php
     include("security.php");
-    security_logout();
 ?>
 
 <html>
@@ -8,9 +7,15 @@
     <title>Logout</title>
 </head>
 <body>
-    <h2>Logged Out</h2>
-    <p>You have been logged out.</p>
-
-    <a href="login.php">Login</a>
+    <?php 
+    if (security_loggedIn()) {
+        security_logout();
+        echo("<h2>Logged Out</h2>");
+        echo("<p>You have been logged out.</p>");
+    }
+    else {
+        echo("<a href='index.php'>Back to Home</a>");
+    }
+    ?>
 </body>
 </html>
